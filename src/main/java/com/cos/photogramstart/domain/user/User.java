@@ -26,17 +26,17 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // 번호 증가 전략이 데이터베이스를 따라간다.
 	private int id;
 	
-	@Column(unique = true) // 중복값 금지
+	@Column(length = 20, unique = true) // 중복값 금지
 	private String username; // 로그인 아이디
-	
+	@Column(nullable = false)
 	private String password; // 패스워드
-	
+	@Column(nullable = false)
 	private String name; // 이름
 	
 	private String website; // 웹 사이트
 	
 	private String bio; // 자기소개
-	
+	@Column(nullable = false)
 	private String email; // 이메일
 	
 	private String phone; // 핸드폰번호
