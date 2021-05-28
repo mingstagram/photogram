@@ -14,7 +14,7 @@ spring:
       
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3306/photogram?serverTimezone=Asia/Seoul
+    url: jdbc:mariadb://localhost:3307/photogram?serverTimezone=Asia/Seoul
     username: cos
     password: cos1234
     
