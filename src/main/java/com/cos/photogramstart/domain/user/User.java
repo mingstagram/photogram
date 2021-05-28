@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.PrePersist;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,6 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 @Entity // DB에 테이블 생성
 public class User {
 	
