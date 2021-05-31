@@ -57,11 +57,12 @@ public class AuthController {
 	
 	// 회원가입 로직
 	// 회원가입버튼 -> /auth/signup -> /auth/signin
-	@PostMapping("/auth/signup")
+	@PostMapping("/auth/signup") // BindingResult : Validator를 상속받는 클래스에서 객체값을 검증하는 방식
 	public String signup(@Valid SignupDto signupDto, BindingResult bindingResult) { // form으로 데이터가 날아오면 key=value(x-www-form-urlencoded)
 		
 		// 만약 bindingResult에 에러값(valid걸었던것에 걸림)이 있다면
 		// 오류가 발생하면 bindingResult에 모아줘서 List로 받는다
+		// 유효성검사는 front단 뿐아니라 Back단에서도 해줘야된다.
 		if(bindingResult.hasErrors()) {
 			Map<String, String> errorMap = new HashMap<>();
 			
@@ -71,7 +72,9 @@ public class AuthController {
 				System.out.println(error.getDefaultMessage());
 				System.out.println("===========================");
 			}
-			
+			// Exception 강제 발동
+			// 여기서 터진 exception을 CustomValidationException에서 낚아채서 
+			// 에러창을 좀더 깔끔하게 보여준다.
 			throw new CustomValidationException("유효성 검사 실패함", errorMap);
 		} else {
 			log.info(signupDto.toString());
