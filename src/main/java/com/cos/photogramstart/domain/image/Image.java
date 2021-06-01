@@ -29,7 +29,7 @@ public class Image {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // 번호 증가 전략이 데이터베이스를 따라간다.
 	private int id;
 	
-	private String caption; 
+	private String caption; // 사진 설명
 	
 	private String postImageUrl; // 사진을 전송받아서 그 사진을 서버에 특정 폴더에 저장 - DB에는 그 저장된 경로를 insert
 	
