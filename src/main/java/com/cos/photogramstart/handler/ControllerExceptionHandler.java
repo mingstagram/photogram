@@ -35,6 +35,9 @@ public class ControllerExceptionHandler {
 	// CustomValidationException << 개발자가 임의로 만든 Exception
 	public ResponseEntity<?> validationApiException(CustomValidationApiException e) {
 		// <?> : return타입이 String이던 Integer던 Map이던 알아서 찾아준다.
+	   System.out.println("---------------------------------------- 나 실행됨?");
+	   System.out.println(e.getMessage());
+	   System.out.println(e.getErrorMap());
 		return new ResponseEntity<>(new CMRespDto<>(-1, e.getMessage(), e.getErrorMap()), HttpStatus.BAD_REQUEST);
 	} // 데이터 리턴
    

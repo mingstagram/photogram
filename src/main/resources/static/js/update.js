@@ -11,11 +11,13 @@ function update(userId, event) {
 		dataType: "json"
 	}).done(res=>{ // HttpStatus 상태코드 200번대
 		alert("회원 수정 성공");
-		console.log("성공", res)
 		location.href = `/user/${userId}`;
 	}).fail(error=>{ // HttpStatus 상태코드 200번대가 아닐 때
-		
-		alert(JSON.stringify(error.responseJSON.data));
+		if(error.errorMap == null){
+			alert(error.responseJSON.message);
+		} else {
+			alert(JSON.stringify(error.responseJSON.errorMap));	
+		}
 		location.href = `/user/${userId}/update`;
 	});
 	
