@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cos.photogramstart.handler.ex.CustomApiException;
 import com.cos.photogramstart.handler.ex.CustomValidationApiException;
 import com.cos.photogramstart.handler.ex.CustomValidationException;
 import com.cos.photogramstart.util.Script;
@@ -35,10 +36,12 @@ public class ControllerExceptionHandler {
 	// CustomValidationException << 개발자가 임의로 만든 Exception
 	public ResponseEntity<?> validationApiException(CustomValidationApiException e) {
 		// <?> : return타입이 String이던 Integer던 Map이던 알아서 찾아준다.
-	   System.out.println("---------------------------------------- 나 실행됨?");
-	   System.out.println(e.getMessage());
-	   System.out.println(e.getErrorMap());
 		return new ResponseEntity<>(new CMRespDto<>(-1, e.getMessage(), e.getErrorMap()), HttpStatus.BAD_REQUEST);
 	} // 데이터 리턴
+   
+   @ExceptionHandler(CustomApiException.class) 
+  	public ResponseEntity<?> ㅁpiException(CustomApiException e) {
+  		return new ResponseEntity<>(new CMRespDto<>(-1, e.getMessage(), null), HttpStatus.BAD_REQUEST);
+  	}
    
 }
