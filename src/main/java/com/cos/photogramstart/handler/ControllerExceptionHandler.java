@@ -21,7 +21,12 @@ public class ControllerExceptionHandler {
 	// 에러창에서 머무르지않고 script 함수를 통해서 처리해주는 메소드
 	@ExceptionHandler(CustomValidationException.class) 
 	public String validationException(CustomValidationException e) {
-		return Script.back(e.getErrorMap().toString());
+		if(e.getErrorMap() == null) {
+			return Script.back(e.getMessage());
+		} else {
+			return Script.back(e.getErrorMap().toString());
+		}
+		
 	} // 자바스크립트 리턴
 
 	// ================================
