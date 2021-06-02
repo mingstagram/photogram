@@ -58,7 +58,7 @@ public class User {
 	// LAZY : User를 Select할 때 해당 User id로 등록된 image들을 가져오지마. - 대신 getImages() 함수가 호출될 때 가져와.
 	// EAGER : User를 Select할 때 해당 User id로 등록된 image들을 전부 Join해서 가져와.
 	@OneToMany(mappedBy = "user" , fetch = FetchType.LAZY)
-	@JsonIgnoreProperties({"user"})
+	@JsonIgnoreProperties({"user"}) // 무한참조를 방지하기 위해서 @JsonIgnoreProperties 알아둬야함.
 	private List<Image> images; // 양방향 매핑
 	
 	private LocalDateTime createDate; // 회원가입 일자
