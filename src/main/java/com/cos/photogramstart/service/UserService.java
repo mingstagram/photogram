@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.cos.photogramstart.domain.user.User;
 import com.cos.photogramstart.domain.user.UserRepository;
+import com.cos.photogramstart.handler.ex.CustomException;
 import com.cos.photogramstart.handler.ex.CustomValidationApiException;
 
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,14 @@ public class UserService {
 
 	private final UserRepository userRepository;
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	public User 회원프로필(int userId) {
+		// SELECT * FROM image WHERE userId = :userId;
+		User userEntity = userRepository.findById(userId).orElseThrow(()->{
+			throw new CustomException("해당 프로필 페이지는 존재하지 않습니다.");
+		});
+		return userEntity;
+	}
 	
 	@Transactional
 	public User 회원수정(int id, User user) {

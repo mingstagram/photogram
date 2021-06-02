@@ -38,10 +38,7 @@ public class UserApiController {
 			Map<String, String> errorMap = new HashMap<>();
 			
 			for(FieldError error : bindingResult.getFieldErrors()) {
-				errorMap.put(error.getField(), error.getDefaultMessage());
-				System.out.println("===========================");
-				System.out.println(error.getDefaultMessage());
-				System.out.println("===========================");
+				errorMap.put(error.getField(), error.getDefaultMessage()); 
 			}
 			// Exception 강제 발동
 			// 여기서 터진 exception을 CustomValidationException에서 낚아채서 

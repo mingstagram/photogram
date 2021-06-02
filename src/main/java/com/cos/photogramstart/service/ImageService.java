@@ -5,6 +5,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,10 @@ public class ImageService {
 	@Value("${file.path}") // application.yml에 정의해놓은 값 가져오기
 	private String uploadFolder;
 	
+	@Transactional 
+	// @Transactional 거는 이유  
+	// DB값을 변경해주는경우 오류가 났을때 DB에 바로 적용하지않고 rollback처리를 해준다.
+	// 그래서 변경(update, insert, delete)이 일어날 때는 @Transactional을 걸어주는 습관을 들여야 한다.
 	public void 사진업로드(ImageUploadDto imageUploadDto, PrincipalDetails principalDetails) {
 		// UUID란? 네트워크 상에서 고유성이 보장되는 id를 만들기 위한 표준 규약.
 		UUID uuid = UUID.randomUUID();
@@ -42,9 +48,9 @@ public class ImageService {
 		
 		// image 테이블에 저장
 		Image image = imageUploadDto.toEntity(imageFileName, principalDetails.getUser()); 
-		Image imageEntity = imageRepository.save(image);
+		imageRepository.save(image);
 		
-		System.out.println(imageEntity);
+//		System.out.println("imageEntity : "+imageEntity.toString());
 		
 		
 	}
