@@ -32,10 +32,17 @@
 						<button class="cta" onclick="location.href='/image/upload'">사진등록</button>
 					</c:when>
 					<c:otherwise>
-						<button class="cta" onclick="toggleSubscribe(this)">구독하기</button>
+						<c:choose>
+							<c:when test="${dto.subscribeState}">
+								<button class="cta blue" onclick="toggleSubscribe(this)">구독취소</button>
+							</c:when>
+							<c:otherwise>
+								<button class="cta" onclick="toggleSubscribe(this)">구독하기</button>
+							</c:otherwise>
+						</c:choose>
 					</c:otherwise>
 				</c:choose>
-				
+
 				<button class="modi" onclick="popup('.modal-info')">
 					<i class="fas fa-cog"></i>
 				</button>
@@ -45,7 +52,7 @@
 				<ul>
 					<li><a href=""> 게시물<span>${dto.imageCount}</span>
 					</a></li>
-					<li><a href="javascript:subscribeInfoModalOpen();"> 구독정보<span>2</span>
+					<li><a href="javascript:subscribeInfoModalOpen();"> 구독정보<span>${dto.subscribeCount}</span>
 					</a></li>
 				</ul>
 			</div>
@@ -69,9 +76,9 @@
 			<div class="tab-1-content-inner">
 
 				<!--아이템들-->
-				
+
 				<!-- EL표현식에서 변수명을 적으면 get함수가 자동 호출된다 -->
-				<c:forEach var="image" items="${dto.user.images}"> 
+				<c:forEach var="image" items="${dto.user.images}">
 					<div class="img-box">
 						<!-- WebMvcConfig에서 설정한 /upload/** 주소 표기가 나오면 설정한 Path값이 나온다 -->
 						<a href=""> <img src="/upload/${image.postImageUrl}" />
