@@ -19,7 +19,7 @@ public class ImageController {
 	private final ImageService imageService;
 
 	@GetMapping({"/","/image/story"})
-	public String story() {
+	public String story() { 
 		return "image/story";
 	}
 	

@@ -2,7 +2,7 @@ package com.cos.photogramstart.service;
 
 import java.util.function.Supplier;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
