@@ -42,6 +42,7 @@ public class Likes {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	// 무한 참조 됨.
 	@JoinColumn(name = "imageId")
 	@ManyToOne
 	private Image image; // 1개의 이미지는 N개의 좋아요가 있을수 있다.
