@@ -32,7 +32,7 @@ function toggleSubscribe(toUserId, obj) {
 			dataType: "json"			
 		}).done(res => {
 			$(obj).text("구독취소");
-		$(obj).toggleClass("blue");
+			$(obj).toggleClass("blue");
 		}).fail(error => {
 			console.log("구독 하기 실패", error);
 		});
