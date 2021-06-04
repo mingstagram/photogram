@@ -36,7 +36,7 @@ function getStoryItem(image) {
 			<img class="profile-image" src="/upload/${image.user.profileImageUrl}"
 				onerror="this.src='/images/person.jpeg'" />
 		</div>
-		<div>${image.user.username}</div>
+		<div><a href="/user/${image.user.id}" style="text-decoration:none;">${image.user.username}</a></div>
 	</div>
 
 	<div class="sl__item__img">
@@ -99,7 +99,6 @@ $(window).scroll(() => {
 		storyLoad();
 	}
 });
-
 
 // (3) 좋아요, 안좋아요
 function toggleLike(imageId) {
