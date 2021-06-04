@@ -43,6 +43,11 @@ public class UserService {
 		dto.setSubscribeState(subscribeState == 1);
 		dto.setSubscribeCount(subscribeCount);
 		
+		// 프로필 화면에서 게시글 사진에 마우스 올렸을때 이미지 카운트
+		userEntity.getImages().forEach((image) -> {
+			image.setLikeCount(image.getLikes().size());
+		});
+		
 		return dto;
 	}
 	
