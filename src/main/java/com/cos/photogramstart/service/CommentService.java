@@ -39,8 +39,12 @@ public class CommentService {
 	}
 	
 	@Transactional
-	public void 댓글삭제() {
-		
+	public void 댓글삭제(int id) {
+		try{ // 삭제시에 오류가 터질 수가 있으니 try~catch로 묶어주는게 좋다.
+			commentRepository.deleteById(id);
+		} catch(Exception e) {
+			throw new CustomApiException(e.getMessage());
+		}
 	}
 	
 }
