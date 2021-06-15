@@ -169,7 +169,7 @@ function addComment(imageId) {
 		data: JSON.stringify(data),
 		contentType: "application/json; charset=utf-8",
 		dataType: "json"
-	}).done(res => {
+	}).done(res => { // res : 통신의 결과
 		console.log("성공", res);
 	}).fail(error => {
 		console.log("오류", error);
@@ -185,7 +185,7 @@ function addComment(imageId) {
 			    <button><i class="fas fa-times"></i></button>
 			  </div>
 	`;
-	commentList.prepend(content); // appent는 뒤에다가 추가해주는것 , 최신댓글이 위로올라와야하기에 prepend사용
+	commentList.prepend(content); // append는 뒤에다가 추가해주는것 , 최신댓글이 위로올라와야하기에 prepend사용
 	commentInput.val("");
 }
 
