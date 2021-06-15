@@ -36,6 +36,7 @@ public class Comment {
 	@Column(length = 100, nullable = false)
 	private String content; // 내용
 	
+	@JsonIgnoreProperties({"images"})
 	@JoinColumn(name = "userId")
 	// 한명의 유저는 여러개의 댓글을 쓸 수 있다. 1:N
 	@ManyToOne(fetch = FetchType.EAGER)
