@@ -194,7 +194,8 @@ function addComment(imageId) {
 	commentList.prepend(content); // append는 뒤에다가 추가해주는것 , 최신댓글이 위로올라와야하기에 prepend사용
 		
 	}).fail(error => {
-		console.log("오류", error);
+		console.log("오류", error.responseJSON.data.content);
+		alert(error.responseJSON.data.content);
 	});
 	
 	commentInput.val(""); // 인풋 필드를 깔끔히 비워준다
