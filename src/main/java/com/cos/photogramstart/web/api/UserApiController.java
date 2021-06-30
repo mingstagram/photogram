@@ -64,20 +64,21 @@ public class UserApiController {
 			@Valid UserUpdateDto userUpdateDto, 
 			BindingResult bindingResult, // 꼭 @Valid가 적혀있는 다음 파라미터에 적어야됨.
 			@AuthenticationPrincipal PrincipalDetails principalDetails) {
-		if(bindingResult.hasErrors()) {
-			Map<String, String> errorMap = new HashMap<>();
-			
-			for(FieldError error : bindingResult.getFieldErrors()) {
-				errorMap.put(error.getField(), error.getDefaultMessage()); 
-			}
-			// Exception 강제 발동
-			// 여기서 터진 exception을 CustomValidationException에서 낚아채서 
-			// 에러창을 좀더 깔끔하게 보여준다.
-			throw new CustomValidationApiException("유효성 검사 실패함", errorMap);
-		} else {
+//		적지 않아도 AOP 처리(ValidationAdvice 한군데서 다 처리해줌)
+//		if(bindingResult.hasErrors()) {
+//			Map<String, String> errorMap = new HashMap<>();
+//			
+//			for(FieldError error : bindingResult.getFieldErrors()) {
+//				errorMap.put(error.getField(), error.getDefaultMessage()); 
+//			}
+//			// Exception 강제 발동
+//			// 여기서 터진 exception을 CustomValidationException에서 낚아채서 
+//			// 에러창을 좀더 깔끔하게 보여준다.
+//			throw new CustomValidationApiException("유효성 검사 실패함", errorMap);
+//		}
 			User userEntity = userService.회원수정(id, userUpdateDto.toEntity());
 			principalDetails.setUser(userEntity); // 세션정보변경
 			return new CMRespDto<>(1, "회원수정완료", userEntity); // 응답시에 userEntity의 모든 getter 함수가 호출되고 JSON으로 파싱하여 응답한다.
-		}
+		
 	}
 }

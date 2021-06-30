@@ -36,17 +36,18 @@ public class CommentApiController {
 			BindingResult bindingResult,
 			@AuthenticationPrincipal PrincipalDetails principalDetails){
 		
-		if(bindingResult.hasErrors()) {
-			Map<String, String> errorMap = new HashMap<>();
-			
-			for(FieldError error : bindingResult.getFieldErrors()) {
-				errorMap.put(error.getField(), error.getDefaultMessage()); 
-			}
-			// Exception 강제 발동
-			// 여기서 터진 exception을 CustomValidationException에서 낚아채서 
-			// 에러창을 좀더 깔끔하게 보여준다.
-			throw new CustomValidationApiException("유효성 검사 실패함", errorMap);
-		}
+//		적지 않아도 AOP 처리(ValidationAdvice 한군데서 다 처리해줌)
+//		if(bindingResult.hasErrors()) {
+//			Map<String, String> errorMap = new HashMap<>();
+//			
+//			for(FieldError error : bindingResult.getFieldErrors()) {
+//				errorMap.put(error.getField(), error.getDefaultMessage()); 
+//			}
+//			// Exception 강제 발동
+//			// 여기서 터진 exception을 CustomValidationException에서 낚아채서 
+//			// 에러창을 좀더 깔끔하게 보여준다.
+//			throw new CustomValidationApiException("유효성 검사 실패함", errorMap);
+//		}
 		
 		Comment comment = commentService.댓글쓰기(commentDto.getContent(), commentDto.getImageId(), principalDetails.getUser().getId()); // content, imageId, userId
 		return new ResponseEntity<>(new CMRespDto<>(1, "댓글쓰기 성공", comment), HttpStatus.CREATED);

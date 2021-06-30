@@ -63,25 +63,27 @@ public class AuthController {
 		// 만약 bindingResult에 에러값(valid걸었던것에 걸림)이 있다면
 		// 오류가 발생하면 bindingResult에 모아줘서 List로 받는다
 		// 유효성검사는 front단 뿐아니라 Back단에서도 해줘야된다.
-		if(bindingResult.hasErrors()) {
-			Map<String, String> errorMap = new HashMap<>();
-			
-			for(FieldError error : bindingResult.getFieldErrors()) {
-				errorMap.put(error.getField(), error.getDefaultMessage()); 
-			}
-			// Exception 강제 발동
-			// 여기서 터진 exception을 CustomValidationException에서 낚아채서 
-			// 에러창을 좀더 깔끔하게 보여준다.
-			throw new CustomValidationException("유효성 검사 실패함", errorMap);
-		} else {
-			log.info(signupDto.toString());
+		
+//    적지 않아도 AOP 처리(ValidationAdvice 한군데서 다 처리해줌)
+//		if(bindingResult.hasErrors()) {
+//			Map<String, String> errorMap = new HashMap<>();
+//			
+//			for(FieldError error : bindingResult.getFieldErrors()) {
+//				errorMap.put(error.getField(), error.getDefaultMessage()); 
+//			}
+//			// Exception 강제 발동
+//			// 여기서 터진 exception을 CustomValidationException에서 낚아채서 
+//			// 에러창을 좀더 깔끔하게 보여준다.
+//			throw new CustomValidationException("유효성 검사 실패함", errorMap);
+//		}
 			// User오브젝트 <- SignupDto값을 넣기
 			User user = signupDto.toEntity(); // 컨트롤러에서 세팅하지 않고, dto내부 메소드에서 세팅
-			log.info(user.toString());
-			User userEntity = authService.회원가입(user);
-			System.out.println(userEntity);
+			authService.회원가입(user);
+			// System.out.println(userEntity);
+			
+			// 로그를 남기는 후처리!
 			return "auth/signin";
-		}
+		
 		
 		
 	}
