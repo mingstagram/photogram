@@ -32,7 +32,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // 번호 증가 전략이 데이터베이스를 따라간다.
 	private int id;
 	
-	@Column(length = 20, unique = true) // 중복값 금지
+	@Column(length = 100, unique = true) // 중복값 금지 // Oauth2 로그인을 위해 컬럼 늘리기
 	private String username; // 로그인 아이디
 	@Column(nullable = false)
 	private String password; // 패스워드

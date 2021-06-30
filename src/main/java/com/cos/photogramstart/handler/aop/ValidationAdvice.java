@@ -39,7 +39,7 @@ public class ValidationAdvice {
 			}
 		}
 		// ProceedingJoinPoint : 함수의 내부까지 접근할 수 있음
-		// proceedingJoinPoint : profile 함수의 모든 곳에 접근할 수 있는 변수
+		// proceedingJoinPoint : 함수의 모든 곳에 접근할 수 있는 변수
 		// profile 함수보다 먼저 실행 
 		return proceedingJoinPoint.proceed(); // proceed() : 그 함수로 다시 돌아가라
 	}
